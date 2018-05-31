@@ -1,0 +1,21 @@
+{
+  "name": "babel-plugin-classnames",
+  "version": "0.1.0",
+  "description": "Never import classnames again! Converts arrays of classnames to a call of a function of your choice.",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [],
+  "author": "Giuseppe Gurgone",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/plugin-syntax-jsx": "^7.0.0-beta.49"
+  }
+}
