@@ -15,7 +15,7 @@ function babelPluginClassNames({ types: t }) {
 
             path.node.body.unshift(importDeclaration)
           }
-      }
+        }
       },
       JSXAttribute(path, state) {
         if (path.node.name.name !== 'className') {
