@@ -24,3 +24,24 @@ classNames(a, b && foo);
     `.trim()
   )
 })
+
+transform(`
+<div className={[a,b && fo]}><div className={[styles.foo]} /></div>;
+`.trim(), { presets: ["@babel/env"],  plugins: ["@babel/plugin-syntax-jsx", plugin] }, (err, result) => {
+  if (err) {
+    throw err
+  }
+
+  assert.equal(
+    result.code,
+    `
+"use strict";
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+<div className={(0, _classnames.default)(a, b && fo)}><div className={(0, _classnames.default)(styles.foo)} /></div>;
+`.trim()
+  )
+})
