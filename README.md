@@ -42,7 +42,7 @@ You can set the package name by defining the `packageName` options:
 ```JSON
 {
   "plugins": [
-    ["babel-plugin-classnames", { "packageName": "dss-classname" }]
+    ["babel-plugin-classnames", { "packageName": "dss-classnames" }]
   ]
 }
 ```
