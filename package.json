@@ -15,8 +15,8 @@
   "author": "Giuseppe Gurgone",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.49",
-    "@babel/plugin-syntax-jsx": "^7.0.0-beta.49",
-    "@babel/preset-env": "^7.0.0-beta.53"
+    "@babel/core": "7.0.0-beta.53",
+    "@babel/plugin-syntax-jsx": "7.0.0-beta.53",
+    "@babel/preset-env": "7.0.0-beta.53"
   }
 }

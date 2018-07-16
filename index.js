@@ -1,4 +1,5 @@
 function babelPluginClassNames({ types: t }) {
+  const cloneNode = t.cloneNode || t.cloneDeep
   return {
     name: "babel-plugin-classnames",
     visitor: {
@@ -34,8 +35,8 @@ function babelPluginClassNames({ types: t }) {
 
         expression.replaceWith(
           t.callExpression(
-            state.classNamesIdentifier,
-            expression.get('elements').map(e => (t.cloneNode || t.cloneDeep)(e.node)),
+            cloneNode(state.classNamesIdentifier),
+            expression.get('elements').map(e => cloneNode(e.node)),
           )
         )
 
