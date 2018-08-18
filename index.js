@@ -11,12 +11,12 @@ function babelPluginClassNames({ types: t }) {
           if (state.hasClassNames) {
             const importDeclaration = t.importDeclaration(
               [
-                !state.opts.importName || state.opts.importName === 'default'
-                  ? t.importDefaultSpecifier(state.classNamesIdentifier)
-                  : t.importSpecifier(
-                    state.classNamesIdentifier,
-                    t.identifier(state.opts.importName)
-                  )
+                state.opts.importName
+                ? t.importSpecifier(
+                  state.classNamesIdentifier,
+                  t.identifier(state.opts.importName)
+                )
+                : t.importDefaultSpecifier(state.classNamesIdentifier)
               ],
               t.stringLiteral(state.opts.packageName || 'classnames')
             )
