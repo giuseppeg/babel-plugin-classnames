@@ -16,9 +16,9 @@ import _classNames from 'classnames'
 <div className={_classNames('btn', props.large && 'large')} />
 ```
 
-By default imports from `classname`. However the package name is configurable.
+By default imports from `classnames`. However the package name is configurable.
 
-## installation
+## Installation
 
 ```
 npm i --save-dev babel-plugin-classnames
@@ -35,14 +35,27 @@ Then add the plugin to your `.babelrc` file:
 }
 ```
 
-## Configuring the package name
+## Configuring the package and import name
 
-You can set the package name by defining the `packageName` options:
+You can set the package name by defining the `packageName` option:
 
 ```JSON
 {
   "plugins": [
     ["babel-plugin-classnames", { "packageName": "dss-classnames" }]
+  ]
+}
+```
+
+If the function you want to use is not the default package export you can use the `importName` option:
+
+```JSON
+{
+  "plugins": [
+    ["babel-plugin-classnames", {
+      "packageName": "emotion",
+      "importName": "cx"
+    }]
   ]
 }
 ```

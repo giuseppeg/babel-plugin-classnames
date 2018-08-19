@@ -26,6 +26,21 @@ classNames(a, b && foo);
 })
 
 transform(`
+<div className={[a,b && fo]} />;
+`.trim(), { plugins: ["@babel/plugin-syntax-jsx", [plugin, { importName: 'cx' }]] }, (err, result) => {
+  if (err) {
+    throw err
+  }
+  assert.equal(
+    result.code,
+    `
+import { cx as _classNames } from "classnames";
+<div className={_classNames(a, b && fo)} />;
+    `.trim()
+  )
+})
+
+transform(`
 <div className={[a,b && fo]}><div className={[styles.foo]} /></div>;
 `.trim(), { presets: ["@babel/env"],  plugins: ["@babel/plugin-syntax-jsx", plugin] }, (err, result) => {
   if (err) {
