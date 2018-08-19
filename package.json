@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-classnames",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Never import classnames again! Converts arrays of classnames to a call of a function of your choice.",
   "main": "index.js",
   "files": [
