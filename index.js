@@ -36,16 +36,25 @@ function babelPluginClassNames({ types: t }) {
         }
 
         const expression = value.get('expression')
-        if (!expression.isArrayExpression()) {
+        if (expression.isArrayExpression()) {
+          expression.replaceWith(
+            t.callExpression(
+              cloneNode(state.classNamesIdentifier),
+              expression.get('elements').map(e => cloneNode(e.node)),
+            )
+          )
+        } else if (state.opts.transformObjects && expression.isObjectExpression()) {
+          expression.replaceWith(
+            t.callExpression(
+              cloneNode(state.classNamesIdentifier),
+              [cloneNode(expression.node)]
+            )
+          )
+        } else {
           return
         }
 
-        expression.replaceWith(
-          t.callExpression(
-            cloneNode(state.classNamesIdentifier),
-            expression.get('elements').map(e => cloneNode(e.node)),
-          )
-        )
+
 
         state.hasClassNames = true
       }
