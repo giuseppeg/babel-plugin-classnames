@@ -41,6 +41,39 @@ import { cx as _classNames } from "classnames";
 })
 
 transform(`
+<div className={{ foo: true }} />;
+`.trim(), { plugins: ["@babel/plugin-syntax-jsx", [plugin, { transformObjects: true }]] }, (err, result) => {
+  if (err) {
+    throw err
+  }
+  assert.equal(
+    result.code,
+    `
+import _classNames from "classnames";
+<div className={_classNames({
+  foo: true
+})} />;
+    `.trim()
+  )
+})
+
+transform(`
+<div className={{ foo: true }} />;
+`.trim(), { plugins: ["@babel/plugin-syntax-jsx", [plugin, { transformObjects: false }]] }, (err, result) => {
+  if (err) {
+    throw err
+  }
+  assert.equal(
+    result.code,
+    `
+<div className={{
+  foo: true
+}} />;
+    `.trim()
+  )
+})
+
+transform(`
 <div className={[a,b && fo]}><div className={[styles.foo]} /></div>;
 `.trim(), { presets: ["@babel/env"],  plugins: ["@babel/plugin-syntax-jsx", plugin] }, (err, result) => {
   if (err) {
