@@ -59,3 +59,27 @@ If the function you want to use is not the default package export you can use th
   ]
 }
 ```
+
+If you want objects to be transformed, you can opt into it with the `transformObjects` option:
+
+```JSON
+{
+  "plugins": [
+    ["babel-plugin-classnames", { "transformObjects": true }]
+  ]
+}
+```
+
+With this option enabled this:
+
+```js
+<div className={{ btn: true, large: props.large }} />
+```
+
+becomes:
+
+```js
+import _classNames from 'classnames'
+
+<div className={_classNames({ btn: true, large: props.large })} />
+```

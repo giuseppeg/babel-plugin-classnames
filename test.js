@@ -25,6 +25,7 @@ classNames(a, b && foo);
   )
 })
 
+
 transform(`
 <div className={[a,b && fo]} />;
 `.trim(), { plugins: ["@babel/plugin-syntax-jsx", [plugin, { importName: 'cx' }]] }, (err, result) => {
@@ -39,6 +40,58 @@ import { cx as _classNames } from "classnames";
     `.trim()
   )
 })
+
+
+transform(`
+<div className={[a,b && fo]} />;
+`.trim(), { plugins: ["@babel/plugin-syntax-jsx", [plugin, { packageName: 'foo' }]] }, (err, result) => {
+  if (err) {
+    throw err
+  }
+  assert.equal(
+    result.code,
+    `
+import _classNames from "foo";
+<div className={_classNames(a, b && fo)} />;
+    `.trim()
+  )
+})
+
+
+transform(`
+<div className={{ foo }} />;
+`.trim(), { plugins: ["@babel/plugin-syntax-jsx", [plugin, { transformObjects: true }]] }, (err, result) => {
+  if (err) {
+    throw err
+  }
+  assert.equal(
+    result.code,
+    `
+import _classNames from "classnames";
+<div className={_classNames({
+  foo
+})} />;
+    `.trim()
+  )
+})
+
+
+transform(`
+<div className={{ foo }} />;
+`.trim(), { plugins: ["@babel/plugin-syntax-jsx", [plugin, { transformObjects: false }]] }, (err, result) => {
+  if (err) {
+    throw err
+  }
+  assert.equal(
+    result.code,
+    `
+<div className={{
+  foo
+}} />;
+    `.trim()
+  )
+})
+
 
 transform(`
 <div className={[a,b && fo]}><div className={[styles.foo]} /></div>;
